@@ -3,17 +3,57 @@ import { ProfilePicture } from "../../components/profile/ProfilePicture";
 import { Colors } from "../../constants/Colors";
 import { defaultPadding } from "../../constants/Size";
 import { useAuthStore } from "../../stores/useAuth";
+import { useUploadProfileImage } from "../../hooks/useUploadProfileImage";
+import * as ImagePicker from 'expo-image-picker';
 
 const uri = "https://media.gettyimages.com/id/2245985254/pt/foto/bilbao-spain-gorka-guruzeta-of-athletic-club-reacts-during-the-laliga-ea-sports-match-between.jpg?s=2048x2048&w=gi&k=20&c=xXlPZtUbJphhzUqydnQQTY_LqXBPUpcjN-klRUCQbIw="
 
 const ProfileScreen = () => {
 
-    const { signOut } = useAuthStore();
+    const { signOut, user } = useAuthStore();
+
+    const { mutateAsync: uploadPhoto } = useUploadProfileImage()
+
+    const handleUploadProfileImage = async () => {
+        try {
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ['images'],
+                allowsEditing: true,
+                aspect: [1, 1],
+                quality: 0.8,
+            });
+            if (result.canceled) {
+                return null;
+            }
+
+            const image = result.assets[0];
+            const response = await fetch(image.uri);
+            const blob = await response.blob();
+            const arrayBuffer = await new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result);
+                reader.onerror = reject;
+                reader.readAsArrayBuffer(blob);
+            });
+            const fileExt = image.uri.split('.').pop() || 'jpg';
+            const fileName = `avatar-${Date.now()}.${fileExt}`;
+            const filePath = `${user?.id}/${fileName}`;
+
+
+            await uploadPhoto({
+                filePath,
+                buffer: arrayBuffer as ArrayBuffer,
+                contentType: blob.type,
+            });
+        } catch (error) {
+            console.log("Error uploading profile image:", error);
+        }
+    }
 
     return (
         <ScrollView style={styles.container}>
             <View style={styles.header}>
-                <ProfilePicture uri={uri} />
+                <ProfilePicture uri={uri} onPress={handleUploadProfileImage} />
                 <Text style={styles.username}>@runner_pro</Text>
                 <Text style={styles.memberSince}>Miembro desde Noviembre 2025</Text>
             </View>

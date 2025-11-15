@@ -1,16 +1,37 @@
-import { View, Image } from "react-native"
+import { Ionicons } from "@expo/vector-icons"
+import { View, Image, StyleSheet, TouchableOpacity } from "react-native"
 
 type Props = {
-    uri: string
+    uri: string,
+    onPress?: () => void,
 }
 
-export const ProfilePicture = ({ uri }: Props) => {
+export const ProfilePicture = ({ uri, onPress }: Props) => {
     return (
-        <View>
+        <TouchableOpacity onPress={onPress}>
             <Image
                 source={{ uri }}
-                style={{ width: 100, height: 100, borderRadius: 50 }}
+                style={styles.image}
             />
-        </View>
+            <View style={styles.iconContainer}>
+                <Ionicons name="pencil" size={16} color="black" />
+            </View>
+        </TouchableOpacity>
     )
 }
+
+const styles = StyleSheet.create({
+    image: {
+        width: 100,
+        height: 100,
+        borderRadius: 50,
+    },
+    iconContainer: {
+        position: 'absolute',
+        bottom: 0,
+        right: 0,
+        backgroundColor: 'red',
+        borderRadius: 15,
+        padding: 4,
+    }
+})
