@@ -89,9 +89,17 @@ const ProfileScreen = () => {
                     </View>
                 </View>
             </View>
-            <TouchableOpacity onPress={signOut}>
-                <Text>Cerrar sesion</Text>
-            </TouchableOpacity>
+            <View style={styles.settingsContainer}>
+                <Text style={styles.sectionTitle}>Configuración</Text>
+
+                <TouchableOpacity
+                    style={styles.logoutButton}
+                    onPress={signOut}
+                    activeOpacity={0.7}
+                >
+                    <Text style={styles.logoutText}>Cerrar Sesión</Text>
+                </TouchableOpacity>
+            </View>
         </ScrollView>
     )
 }
@@ -108,12 +116,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         alignItems: 'center',
         gap: 12,
-        borderBottomLeftRadius: 24,
-        borderBottomRightRadius: 24,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.1,
-        shadowRadius: 8,
         elevation: 4,
     },
     username: {
@@ -163,6 +165,28 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: '700',
         color: Colors.primary,
+    },
+    settingsContainer: {
+        padding: defaultPadding,
+        gap: 12,
+        marginTop: 8,
+    },
+    logoutButton: {
+        backgroundColor: Colors.destructive,
+        borderRadius: 16,
+        padding: 18,
+        alignItems: 'center',
+        shadowColor: Colors.destructive,
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.2,
+        shadowRadius: 8,
+        elevation: 3,
+    },
+    logoutText: {
+        fontSize: 16,
+        fontWeight: '600',
+        color: '#FFFFFF',
+        letterSpacing: 0.3,
     },
 })
 

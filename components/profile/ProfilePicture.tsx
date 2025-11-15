@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons"
 import { View, Image, StyleSheet, TouchableOpacity } from "react-native"
+import { Colors } from "../../constants/Colors"
 
 type Props = {
     uri: string,
@@ -30,7 +31,7 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 0,
         right: 0,
-        backgroundColor: 'red',
+        backgroundColor: Colors.destructive,
         borderRadius: 15,
         padding: 4,
     }
