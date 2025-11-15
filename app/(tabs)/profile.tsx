@@ -1,11 +1,15 @@
-import { StyleSheet, Text, View, ScrollView } from "react-native"
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from "react-native"
 import { ProfilePicture } from "../../components/profile/ProfilePicture";
 import { Colors } from "../../constants/Colors";
 import { defaultPadding } from "../../constants/Size";
+import { useAuthStore } from "../../stores/useAuth";
 
 const uri = "https://media.gettyimages.com/id/2245985254/pt/foto/bilbao-spain-gorka-guruzeta-of-athletic-club-reacts-during-the-laliga-ea-sports-match-between.jpg?s=2048x2048&w=gi&k=20&c=xXlPZtUbJphhzUqydnQQTY_LqXBPUpcjN-klRUCQbIw="
 
 const ProfileScreen = () => {
+
+    const { signOut } = useAuthStore();
+
     return (
         <ScrollView style={styles.container}>
             <View style={styles.header}>
@@ -45,6 +49,9 @@ const ProfileScreen = () => {
                     </View>
                 </View>
             </View>
+            <TouchableOpacity onPress={signOut}>
+                <Text>Cerrar sesion</Text>
+            </TouchableOpacity>
         </ScrollView>
     )
 }
