@@ -12,6 +12,7 @@ import { Colors } from '../constants/Colors';
 import { defaultPadding } from '../constants/Size';
 import { usePostRun } from '../hooks/usePostRun';
 import { useAuthStore } from '../stores/useAuth';
+import { RunHeader } from '../components/run/RunHeader';
 
 
 const RunScreen = () => {
@@ -144,20 +145,7 @@ const RunScreen = () => {
         <>
             <Stack.Screen
                 options={{
-                    title: 'Running',
-                    headerStyle: { backgroundColor: '#fff' },
-                    headerRight: () => (
-                        <TouchableOpacity
-                            onPress={handleTogglePause}
-                            style={{ flexDirection: 'row', alignItems: 'center', paddingRight: defaultPadding }}
-                        >
-                            <Ionicons
-                                name={isPaused ? "play" : "pause"}
-                                size={24}
-                                color="black"
-                            />
-                        </TouchableOpacity>
-                    ),
+                    header: () => (<RunHeader />)
                 }}
             />
             <View style={styles.container}>
