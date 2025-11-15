@@ -2,6 +2,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { defaultPadding } from "../../constants/Size";
+import { Link } from "expo-router";
 
 export const HomeHeader = () => {
 
@@ -10,9 +11,11 @@ export const HomeHeader = () => {
     return (
         <View style={[styles.header, { paddingTop: insets.top }]}>
             <Text style={styles.title}>¡Hola, Runner!</Text>
-            <TouchableOpacity>
-                <Ionicons name="notifications-outline" size={24} />
-            </TouchableOpacity>
+            <Link href="/notifications" asChild>
+                <TouchableOpacity>
+                    <Ionicons name="notifications-outline" size={24} />
+                </TouchableOpacity>
+            </Link>
         </View>
     );
 }
