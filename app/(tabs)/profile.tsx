@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View, ScrollView } from "react-native"
 import { ProfilePicture } from "../../components/profile/ProfilePicture";
 import { Colors } from "../../constants/Colors";
+import { defaultPadding } from "../../constants/Size";
 
 const uri = "https://media.gettyimages.com/id/2245985254/pt/foto/bilbao-spain-gorka-guruzeta-of-athletic-club-reacts-during-the-laliga-ea-sports-match-between.jpg?s=2048x2048&w=gi&k=20&c=xXlPZtUbJphhzUqydnQQTY_LqXBPUpcjN-klRUCQbIw="
 
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
         fontWeight: '400',
     },
     statsContainer: {
-        padding: 16,
+        padding: defaultPadding,
         gap: 12,
         marginTop: 8,
     },

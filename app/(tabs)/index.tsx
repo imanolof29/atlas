@@ -2,18 +2,18 @@ import { Ionicons } from "@expo/vector-icons";
 import { Link, Stack } from "expo-router"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Colors } from "../../constants/Colors";
+import { HomeHeader } from "../../components/home/HomeHeader";
+import { defaultPadding } from "../../constants/Size";
 
 const HomeScreen = () => {
     return (
         <>
             <Stack.Screen
                 options={{
-                    headerTitle: '¡Hola, Runner!',
-                    headerRight: () => <Ionicons name="notifications-outline" size={24} style={{ marginRight: 16 }} />
+                    header: () => (<HomeHeader />)
                 }}
             />
-            <View>
-                <Text>Home screen</Text>
+            <View style={styles.container}>
                 <Link asChild href="/run">
                     <TouchableOpacity style={styles.runButton}>
                         <Ionicons name="play" size={16} color="white" />
@@ -26,6 +26,11 @@ const HomeScreen = () => {
 }
 
 const styles = StyleSheet.create({
+    container: {
+        paddingHorizontal: defaultPadding,
+        flex: 1,
+        justifyContent: 'center',
+    },
     runButton: {
         backgroundColor: Colors.primary,
         borderRadius: 8,

@@ -9,6 +9,7 @@ import { EndRunButton } from '../components/run/EndRunButton';
 import { Stack } from 'expo-router';
 import { useRunStore } from '../stores/useRun';
 import { Colors } from '../constants/Colors';
+import { defaultPadding } from '../constants/Size';
 
 
 const RunScreen = () => {
@@ -126,7 +127,7 @@ const RunScreen = () => {
                     headerRight: () => (
                         <TouchableOpacity
                             onPress={handleTogglePause}
-                            style={{ flexDirection: 'row', alignItems: 'center', paddingRight: 16 }}
+                            style={{ flexDirection: 'row', alignItems: 'center', paddingRight: defaultPadding }}
                         >
                             <Ionicons
                                 name={isPaused ? "play" : "pause"}
@@ -213,7 +214,7 @@ const styles = StyleSheet.create({
         bottom: 0,
         width: '100%',
         backgroundColor: 'white',
-        paddingHorizontal: 16,
+        paddingHorizontal: defaultPadding,
         paddingTop: 20,
         borderTopLeftRadius: 20,
         borderTopRightRadius: 20,
