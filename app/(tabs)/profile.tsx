@@ -5,6 +5,7 @@ import { defaultPadding } from "../../constants/Size";
 import { useAuthStore } from "../../stores/useAuth";
 import { useUploadProfileImage } from "../../hooks/useUploadProfileImage";
 import * as ImagePicker from 'expo-image-picker';
+import { SafeAreaView } from "react-native-safe-area-context";
 
 const uri = "https://media.gettyimages.com/id/2245985254/pt/foto/bilbao-spain-gorka-guruzeta-of-athletic-club-reacts-during-the-laliga-ea-sports-match-between.jpg?s=2048x2048&w=gi&k=20&c=xXlPZtUbJphhzUqydnQQTY_LqXBPUpcjN-klRUCQbIw="
 
@@ -19,7 +20,7 @@ const ProfileScreen = () => {
             const result = await ImagePicker.launchImageLibraryAsync({
                 mediaTypes: ['images'],
                 allowsEditing: true,
-                aspect: [1, 1],
+                aspect: [4, 3],
                 quality: 0.8,
             });
             if (result.canceled) {
@@ -51,56 +52,58 @@ const ProfileScreen = () => {
     }
 
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.header}>
-                <ProfilePicture uri={uri} onPress={handleUploadProfileImage} />
-                <Text style={styles.username}>@runner_pro</Text>
-                <Text style={styles.memberSince}>Miembro desde Noviembre 2025</Text>
-            </View>
-
-            <View style={styles.statsContainer}>
-                <Text style={styles.sectionTitle}>Estadísticas</Text>
-
-                <View style={styles.statCard}>
-                    <View style={styles.statRow}>
-                        <Text style={styles.statLabel}>Total Kilómetros</Text>
-                        <Text style={styles.statValue}>247.8 KM</Text>
-                    </View>
+        <SafeAreaView style={styles.container} edges={['top']}>
+            <ScrollView showsVerticalScrollIndicator={false}>
+                <View style={styles.header}>
+                    <ProfilePicture uri={uri} onPress={handleUploadProfileImage} />
+                    <Text style={styles.username}>@runner_pro</Text>
+                    <Text style={styles.memberSince}>Miembro desde Noviembre 2025</Text>
                 </View>
 
-                <View style={styles.statCard}>
-                    <View style={styles.statRow}>
-                        <Text style={styles.statLabel}>Carreras Completadas</Text>
-                        <Text style={styles.statValue}>58</Text>
+                <View style={styles.statsContainer}>
+                    <Text style={styles.sectionTitle}>Estadísticas</Text>
+
+                    <View style={styles.statCard}>
+                        <View style={styles.statRow}>
+                            <Text style={styles.statLabel}>Total Kilómetros</Text>
+                            <Text style={styles.statValue}>247.8 KM</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.statCard}>
+                        <View style={styles.statRow}>
+                            <Text style={styles.statLabel}>Carreras Completadas</Text>
+                            <Text style={styles.statValue}>58</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.statCard}>
+                        <View style={styles.statRow}>
+                            <Text style={styles.statLabel}>Tiempo Total</Text>
+                            <Text style={styles.statValue}>21h 45m</Text>
+                        </View>
+                    </View>
+
+                    <View style={styles.statCard}>
+                        <View style={styles.statRow}>
+                            <Text style={styles.statLabel}>Ritmo Medio</Text>
+                            <Text style={styles.statValue}>4:32 min/km</Text>
+                        </View>
                     </View>
                 </View>
+                <View style={styles.settingsContainer}>
+                    <Text style={styles.sectionTitle}>Configuración</Text>
 
-                <View style={styles.statCard}>
-                    <View style={styles.statRow}>
-                        <Text style={styles.statLabel}>Tiempo Total</Text>
-                        <Text style={styles.statValue}>21h 45m</Text>
-                    </View>
+                    <TouchableOpacity
+                        style={styles.logoutButton}
+                        onPress={signOut}
+                        activeOpacity={0.7}
+                    >
+                        <Text style={styles.logoutText}>Cerrar Sesión</Text>
+                    </TouchableOpacity>
                 </View>
-
-                <View style={styles.statCard}>
-                    <View style={styles.statRow}>
-                        <Text style={styles.statLabel}>Ritmo Medio</Text>
-                        <Text style={styles.statValue}>4:32 min/km</Text>
-                    </View>
-                </View>
-            </View>
-            <View style={styles.settingsContainer}>
-                <Text style={styles.sectionTitle}>Configuración</Text>
-
-                <TouchableOpacity
-                    style={styles.logoutButton}
-                    onPress={signOut}
-                    activeOpacity={0.7}
-                >
-                    <Text style={styles.logoutText}>Cerrar Sesión</Text>
-                </TouchableOpacity>
-            </View>
-        </ScrollView>
+            </ScrollView>
+        </SafeAreaView>
     )
 }
 

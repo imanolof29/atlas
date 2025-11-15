@@ -28,7 +28,8 @@ export default function TabLayout() {
                 name="profile"
                 options={{
                     title: 'Perfil',
-                    tabBarIcon: ({ color }) => <Ionicons size={28} name="person" color={color} />
+                    tabBarIcon: ({ color }) => <Ionicons size={28} name="person" color={color} />,
+                    headerShown: false,
                 }}
             />
         </Tabs>
