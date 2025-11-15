@@ -10,6 +10,8 @@ import { Stack } from 'expo-router';
 import { useRunStore } from '../stores/useRun';
 import { Colors } from '../constants/Colors';
 import { defaultPadding } from '../constants/Size';
+import { usePostRun } from '../hooks/usePostRun';
+import { useAuthStore } from '../stores/useAuth';
 
 
 const RunScreen = () => {
@@ -118,6 +120,26 @@ const RunScreen = () => {
         }
     };
 
+    const { mutateAsync: postRun } = usePostRun();
+
+    const { user } = useAuthStore();
+
+    const handleEndRun = async () => {
+        try {
+            const runData = {
+                distance,
+                duration,
+                pace,
+                locations,
+                userId: user?.id,
+            };
+            await postRun(runData);
+            console.log('Run data posted successfully');
+        } catch (error) {
+            console.error('Error posting run data:', error);
+        }
+    }
+
     return (
         <>
             <Stack.Screen
@@ -187,7 +209,7 @@ const RunScreen = () => {
                             />
                         </View>
                         <View style={styles.buttonContainer}>
-                            <EndRunButton onClick={() => console.log("LOCATIONS ", locations)} />
+                            <EndRunButton onClick={handleEndRun} />
                         </View>
                     </SafeAreaView>
                 </View>
