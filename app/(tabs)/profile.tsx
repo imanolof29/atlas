@@ -6,6 +6,7 @@ import { useAuthStore } from "../../stores/useAuth";
 import { useUploadProfileImage } from "../../hooks/useUploadProfileImage";
 import * as ImagePicker from 'expo-image-picker';
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useGetUserStats } from "../../hooks/useGetUserStats";
 
 const uri = "https://media.gettyimages.com/id/2245985254/pt/foto/bilbao-spain-gorka-guruzeta-of-athletic-club-reacts-during-the-laliga-ea-sports-match-between.jpg?s=2048x2048&w=gi&k=20&c=xXlPZtUbJphhzUqydnQQTY_LqXBPUpcjN-klRUCQbIw="
 
@@ -14,6 +15,7 @@ const ProfileScreen = () => {
     const { signOut, user } = useAuthStore();
 
     const { mutateAsync: uploadPhoto } = useUploadProfileImage()
+    //const { data: userStats } = useGetUserStats()
 
     const handleUploadProfileImage = async () => {
         try {

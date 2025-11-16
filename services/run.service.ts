@@ -12,7 +12,7 @@ class RunService {
                 'user_id': data.userId,
                 'route': encodePolyline(data.locations),
                 'started_at': new Date(),
-                'ended_at': new Date(),
+                'ended_at': new Date(new Date().getTime() + data.duration * 1000),
             })
             if (error) {
                 throw error;

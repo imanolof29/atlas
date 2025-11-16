@@ -55,6 +55,27 @@ class UsersService {
         }
     }
 
+    async getUserStats() {
+        const { data: { user }, error: authError } = await supabase.auth.getUser();
+
+        if (authError || !user) {
+            throw new Error('Usuario no autenticado');
+        }
+
+        const { data, error } = await supabase
+            .from('user_stats')
+            .select('*')
+            .eq('user_id', user.id)
+            .single();
+
+        if (error) {
+            console.error('❌ Error al obtener estadísticas del usuario:', error);
+            throw error;
+        }
+
+        return data;
+    }
+
 }
 
 export const usersService = new UsersService();

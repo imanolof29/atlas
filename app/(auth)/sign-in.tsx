@@ -74,11 +74,7 @@ const SignInScreen = () => {
                                         ],
                                     });
 
-                                    if (credential.identityToken) {
-                                        await signInWithApple(credential.identityToken);
-                                    } else {
-                                        console.error('No identity token returned from Apple Sign-In');
-                                    }
+                                    await signInWithApple(credential);
                                 } catch (error) {
                                     console.error('Error during Apple Sign-In:', error);
                                 }
